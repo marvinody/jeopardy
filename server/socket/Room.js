@@ -27,6 +27,7 @@ module.exports = io => {
       socket.data.room = this // we'll need this later
 
       socket.join(this.uniqueName) // host should be aware of updates in their room
+      socket.emit(ACTIONS.ROOM_JOIN.RES, this.expandedInfo()) // tell the client they joined!
     }
 
     addPlayer(socket) {
@@ -148,10 +149,7 @@ module.exports = io => {
       return {
         id: this.id,
         name: this.name,
-        state: this.state,
-        size: this.size,
-        playerCount: Object.keys(this.players).length,
-        spectatorCount: Object.keys(this.spectators).length
+        state: this.state
       }
     }
   }
@@ -159,6 +157,17 @@ module.exports = io => {
   class RoomList {
     constructor() {
       this.rooms = {}
+    }
+
+    addPlayer(roomId, socket) {
+      if (!this.rooms[roomId]) {
+        socket.emit(EVENT.ERROR, {
+          redirect: '/',
+          message: 'Specified room does not exist...sending back to homepage'
+        })
+        return
+      }
+      this.rooms[roomId].addPlayer(socket)
     }
 
     newRoom(info) {

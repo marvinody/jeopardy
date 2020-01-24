@@ -6,3 +6,4 @@
 
 export {default as Landing} from './Landing'
 export {default as CreateRoom} from './CreateRoom'
+export {default as JoinRoom} from './JoinRoom'
