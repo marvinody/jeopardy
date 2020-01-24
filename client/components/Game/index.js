@@ -12,7 +12,6 @@ const Game = ({game, match, isHost}) => {
   }
   return (
     <div className="game">
-      GAME!
       {isHost && <Host />}
       {!isHost && <Team />}
     </div>

@@ -19,5 +19,11 @@ module.exports = {
       REQ: 'REQ_ROOM_JOIN',
       RES: 'RES_ROOM_JOIN'
     }
+  },
+  GAME_STATE: {
+    PREGAME: 'PREGAME',
+    INGAME: 'INGAME',
+    PAUSED: 'PAUSED',
+    FINISHED: 'FINISHED'
   }
 }

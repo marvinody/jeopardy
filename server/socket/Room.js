@@ -1,12 +1,7 @@
 const genId = require('./id')
 const genName = require('./name')
-const {EVENT, ACTIONS} = require('../../constants/socket')
-const state = {
-  PREGAME: 'PREGAME',
-  INGAME: 'INGAME',
-  PAUSED: 'PAUSED',
-  FINISHED: 'FINISHED'
-}
+const boards = require('../../constants/boards')
+const {EVENT, ACTIONS, GAME_STATE: state} = require('../../constants/socket')
 
 module.exports = io => {
   class Room {
@@ -18,6 +13,8 @@ module.exports = io => {
       this.teamCount = teamCount
       this.uniqueName = `room-#${this.id}` // string for sockets to join
       this.state = state.PREGAME
+      // TODO make this dynamic
+      this.board = boards['flex-immersive-1']
 
       console.log(`${this.uniqueName} (AKA ${this.name}) has been created!`)
     }
@@ -38,7 +35,7 @@ module.exports = io => {
       }
       const numTeams = Object.keys(this.teams).length
       const canAddTeam = numTeams < this.teamCount
-      console.log({numTeams, canAddTeam})
+
       // if we're full or ingame, just send an error
       if (!canAddTeam || this.state === state.INGAME) {
         socket.emit(EVENT.ERROR, {
@@ -134,6 +131,7 @@ module.exports = io => {
         name: this.name,
         state: this.state,
         teamCount: this.teamCount,
+        board: this.board,
         ...this.playerInfo()
       }
     }
@@ -141,6 +139,7 @@ module.exports = io => {
     playerInfo() {
       return {
         teams: Object.values(this.teams).map(v => ({
+          id: v.id,
           teamName: v.data.teamName
         })),
         host: {
