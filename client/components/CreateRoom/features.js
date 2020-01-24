@@ -1,8 +1,8 @@
 import socket from '../../socket'
-import {CREATE_ROOM} from '../../../constants/socket'
+import {ACTIONS} from '../../../constants/socket'
 
 export const createRoom = ({gameName, teamCount, questionSet}) => {
-  socket.emit(CREATE_ROOM, {
+  socket.emit(ACTIONS.ROOM_CREATE.REQ, {
     gameName,
     teamCount,
     questionSet
