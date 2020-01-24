@@ -4,8 +4,8 @@ import {gotoNewRoom, gotoJoinRoom} from './features'
 const Landing = () => {
   return (
     <div className="landing">
-      <div onClick={gotoNewRoom}>Join existing room</div>
-      <div onClick={gotoJoinRoom}>Create a new room</div>
+      <div onClick={gotoJoinRoom}>Join existing room</div>
+      <div onClick={gotoNewRoom}>Create a new room</div>
     </div>
   )
 }

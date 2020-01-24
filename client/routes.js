@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {withRouter, Route, Switch} from 'react-router-dom'
-import {Landing} from './components'
+import {Landing, CreateRoom} from './components'
 /**
  * COMPONENT
  */
@@ -9,6 +9,7 @@ class Routes extends Component {
     return (
       <Switch>
         <Route component={Landing} path="/" exact={true} />
+        <Route component={CreateRoom} path="/create" exact={true} />
       </Switch>
     )
   }
