@@ -7,7 +7,8 @@ const CreateRoom = () => {
 
   const setterMaker = setter => event => setter(event.target.value)
 
-  const createRoomClick = () => {
+  const createRoomClick = event => {
+    event.preventDefault()
     createRoom({gameName, teamCount, questionSet: 'flex-week-1'})
   }
   return (
