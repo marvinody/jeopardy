@@ -2,12 +2,8 @@ import React, {useEffect} from 'react'
 import {joinRoom} from './features'
 
 const JoinRoom = ({match: {params: {roomId}}}) => {
-  useEffect(
-    () => {
-      joinRoom(roomId)
-    },
-    [roomId]
-  )
+  joinRoom(roomId)
+
   return <div className="join-room" />
 }
 

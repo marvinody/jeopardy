@@ -1,4 +1,5 @@
 const genId = require('./id')
+const genName = require('./name')
 const {EVENT, ACTIONS} = require('../../constants/socket')
 const state = {
   PREGAME: 'PREGAME',
@@ -36,17 +37,20 @@ module.exports = io => {
         return
       }
       const numTeams = Object.keys(this.teams).length
-      const canAddTeam = numTeams < this.size
+      const canAddTeam = numTeams < this.teamCount
+      console.log({numTeams, canAddTeam})
       // if we're full or ingame, just send an error
       if (!canAddTeam || this.state === state.INGAME) {
         socket.emit(EVENT.ERROR, {
           redirect: '/',
           message: 'That Jeopardy lobby is full or in progress!'
         })
+        return
       }
       this.teams[socket.id] = socket // save them here
 
       socket.join(this.uniqueName) // listen to future updates
+      socket.data.teamName = genName() // for their visualization
       socket.data.room = this // quick lookup for later
       socket.data.timeJoinedRoom = Date.now() // presentation order
       socket.emit(ACTIONS.ROOM_JOIN.RES, this.expandedInfo()) // tell the client they joined!
