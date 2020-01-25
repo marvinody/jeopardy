@@ -18,6 +18,15 @@ module.exports = io => {
       rooms.addPlayer(id, socket)
     })
 
+    socket.on(ACTIONS.GAME_START.REQ, () => {
+      const room = socket.data.room
+      // can't start if doesn't belong to a room
+      if (!room) {
+        return
+      }
+      room.attemptToStart(socket)
+    })
+
     socket.on('disconnect', () => {
       console.log(`Connection ${socket.id} has left the building`)
     })

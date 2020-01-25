@@ -15,6 +15,8 @@ module.exports = io => {
       this.state = state.PREGAME
       // TODO make this dynamic
       this.board = boards['flex-immersive-1']
+      // hold score and who's it is. maybe other info like bet?
+      this.teamData = []
 
       console.log(`${this.uniqueName} (AKA ${this.name}) has been created!`)
     }
@@ -67,6 +69,9 @@ module.exports = io => {
         )
         return
       }
+      console.debug(
+        `${this.uniqueName} state change: ${this.state}->${newState}`
+      )
       this.state = newState
       io.to(this.uniqueName).emit(EVENT.ROOM_STATE_CHANGE, newState)
     }
@@ -116,11 +121,21 @@ module.exports = io => {
       if (this.host.id !== socket.id) {
         return
       }
-      if (!this.game) {
-        // TODO fill this out and the func below
+
+      const socketIds = Object.keys(this.teams)
+      // need a full size game to start!
+      if (socketIds.length < this.teamCount) {
+        return
       }
 
+      this.teamData = socketIds.map(socketId => ({
+        score: 0,
+        id: socketId,
+        teamName: this.teams[socketId].data.teamName
+      }))
+
       this.updateState(state.INGAME)
+      socket.emit(ACTIONS.GAME_START.RES, this.expandedInfo())
     }
 
     createGame() {}
@@ -142,6 +157,7 @@ module.exports = io => {
           id: v.id,
           teamName: v.data.teamName
         })),
+        teamData: this.teamData,
         host: {
           id: this.host.id
         }

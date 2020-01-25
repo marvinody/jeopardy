@@ -1,7 +1,7 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import {startGame} from './features'
 
-const Host = ({game}) => {
+const Pregame = ({game}) => {
   const emptyCount = game.teamCount - game.teams.length
   const teamNames = game.teams.map(team => (
     <li key={team.teamName}>{team.teamName}</li>
@@ -12,7 +12,7 @@ const Host = ({game}) => {
   return (
     <div>
       <h1>{game.name}</h1>
-      <button type="button" disabled={emptyCount !== 0}>
+      <button type="button" disabled={emptyCount !== 0} onClick={startGame}>
         Start
       </button>
       <ul>
@@ -23,6 +23,4 @@ const Host = ({game}) => {
   )
 }
 
-export default connect(state => ({
-  game: state.game
-}))(Host)
+export default Pregame

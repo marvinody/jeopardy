@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {GAME_STATE} from '../../../constants/socket'
+import {GAME_STATE} from '../../../../constants/socket'
 
 const stateToString = {
   [GAME_STATE.PREGAME]: 'Waiting to start...',

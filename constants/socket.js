@@ -18,6 +18,10 @@ module.exports = {
     ROOM_JOIN: {
       REQ: 'REQ_ROOM_JOIN',
       RES: 'RES_ROOM_JOIN'
+    },
+    GAME_START: {
+      REQ: 'REQ_GAME_START',
+      RES: 'RES_GAME_START'
     }
   },
   GAME_STATE: {
