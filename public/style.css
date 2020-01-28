@@ -10,7 +10,68 @@ label {
   display: block;
 }
 
+#app {
+  /* this may change later, but 95 is good for now! */
+  height: 95vh;
+}
+
 .landing div {
   padding: 2rem;
   font-size: 2rem;
 }
+
+.game {
+  height: 100%;
+}
+
+.in-game {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.team-score-group:nth-child(n + 2) {
+  border-top: 1px solid black;
+}
+
+.board {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.category > h4 {
+  text-align: center;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+}
+
+.question.price {
+  margin: 0.5rem;
+  border: 1px solid black;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- */
