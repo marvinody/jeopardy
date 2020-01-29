@@ -13,7 +13,7 @@ export const showQuestion = ({categoryIdx, questionIdx}) => ({
   questionIdx
 })
 
-// ugly function that updates only 1 question and sets answered to true
+// ugly function that updates only 1 question and sets answered to true if match
 const updateQuestion = (state, action) => {
   return {
     ...state,
@@ -25,7 +25,7 @@ const updateQuestion = (state, action) => {
             ...category,
             questions: category.questions.map((question, qIdx) => ({
               ...question,
-              answered: !question.answered && qIdx === action.questionIdx
+              answered: question.answered || qIdx === action.questionIdx
             }))
           }
         }
