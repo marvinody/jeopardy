@@ -1,4 +1,5 @@
 const genId = require('./id')
+const {boardMaker} = require('./utils')
 const genName = require('./name')
 const boards = require('../../constants/boards')
 const {EVENT, ACTIONS, GAME_STATE: state} = require('../../constants/socket')
@@ -14,7 +15,7 @@ module.exports = io => {
       this.uniqueName = `room-#${this.id}` // string for sockets to join
       this.state = state.PREGAME
       // TODO make this dynamic
-      this.board = boards['flex-immersive-1']
+      this.board = boardMaker(boards['flex-immersive-1'])
       // hold score and who's it is. maybe other info like bet?
       this.teamData = []
 
@@ -136,6 +137,20 @@ module.exports = io => {
 
       this.updateState(state.INGAME)
       socket.emit(ACTIONS.GAME_START.RES, this.expandedInfo())
+      this.addHostListeners()
+    }
+
+    addHostListeners() {
+      this.host.on(
+        ACTIONS.GAME_QUESTION_SELECT.REQ,
+        ({categoryIdx, questionIdx}) => {
+          // just emit it for now
+          this.host.emit(ACTIONS.GAME_QUESTION_SELECT.RES, {
+            categoryIdx,
+            questionIdx
+          })
+        }
+      )
     }
 
     createGame() {}

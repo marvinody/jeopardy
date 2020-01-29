@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {showQuestionReq} from './features'
 const Ingame = ({game}) => {
   return (
     <div className="in-game">
@@ -17,15 +17,27 @@ const Ingame = ({game}) => {
 const Board = ({board}) => {
   return (
     <div className="board">
-      {board.categories.map(category => (
+      {board.categories.map((category, categoryIdx) => (
         <div className="category" key={category.title}>
           <h4>{category.title}</h4>
           <div className="questions">
-            {category.questions.map((question, idx) => (
-              <div className="question price" key="question">
-                <span>{(idx + 1) * 200}</span>
-              </div>
-            ))}
+            {category.questions.map((question, questionIdx) => {
+              const {answered} = question
+              const className = [
+                'question',
+                'price',
+                answered ? 'answered' : ''
+              ].join(' ')
+              return (
+                <div
+                  className={className}
+                  key="question"
+                  onClick={() => showQuestionReq({categoryIdx, questionIdx})}
+                >
+                  <span>{(questionIdx + 1) * 200}</span>
+                </div>
+              )
+            })}
           </div>
         </div>
       ))}

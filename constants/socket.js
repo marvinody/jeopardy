@@ -22,6 +22,10 @@ module.exports = {
     GAME_START: {
       REQ: 'REQ_GAME_START',
       RES: 'RES_GAME_START'
+    },
+    GAME_QUESTION_SELECT: {
+      REQ: 'REQ_GAME_QUESTION_SELECT',
+      RES: 'RES_GAME_QUESTION_SELECT'
     }
   },
   GAME_STATE: {
