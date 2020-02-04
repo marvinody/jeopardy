@@ -1,5 +1,7 @@
 import React from 'react'
 import {showQuestionReq} from './features'
+import QuestionModal from '../../QuestionModal'
+
 const Ingame = ({game}) => {
   return (
     <div className="in-game">
@@ -10,6 +12,7 @@ const Ingame = ({game}) => {
         <TeamScores teamData={game.teamData} />
         <Board board={game.board} />
       </div>
+      <QuestionModal />
     </div>
   )
 }

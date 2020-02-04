@@ -1,5 +1,6 @@
 export const UPDATE_GAME = 'UPDATE_GAME'
-const SHOW_QUESTION = 'SHOW_QUESTION'
+export const SHOW_QUESTION = 'SHOW_QUESTION'
+export const HIDE_QUESTION = 'HIDE_QUESTION'
 const initialState = {}
 
 export const updateGame = game => ({
@@ -7,11 +8,22 @@ export const updateGame = game => ({
   game
 })
 
-export const showQuestion = ({categoryIdx, questionIdx}) => ({
-  type: SHOW_QUESTION,
-  categoryIdx,
-  questionIdx
-})
+export const showQuestion = ({categoryIdx, questionIdx}) => (
+  dispatch,
+  getState
+) => {
+  const {game} = getState()
+  const question = game.board.categories[categoryIdx].questions[questionIdx]
+
+  dispatch({
+    type: SHOW_QUESTION,
+    categoryIdx,
+    questionIdx,
+    question: question.question,
+    answer: question.answer,
+    price: (questionIdx + 1) * 200
+  })
+}
 
 // ugly function that updates only 1 question and sets answered to true if match
 const updateQuestion = (state, action) => {

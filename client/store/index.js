@@ -5,8 +5,16 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import game from './game'
 import isHost from './is_host'
+import questionModal from './question_modal'
+import question from './question'
 
-const reducer = combineReducers({user, isHost, game})
+const reducer = combineReducers({
+  user,
+  isHost,
+  game,
+  questionModal,
+  question
+})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
@@ -15,3 +23,5 @@ const store = createStore(reducer, middleware)
 export default store
 export * from './game'
 export * from './is_host'
+export * from './question_modal'
+export * from './question'
