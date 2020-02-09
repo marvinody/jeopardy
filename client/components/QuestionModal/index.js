@@ -1,7 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {hideQuestion} from '../../store'
 
-const QuestionModal = ({showModal, question, board, categoryIdx}) => {
+const QuestionModal = ({
+  showModal,
+  question,
+  board,
+  categoryIdx,
+  hideModal
+}) => {
   if (!showModal) {
     return null
   }
@@ -9,6 +16,9 @@ const QuestionModal = ({showModal, question, board, categoryIdx}) => {
   return (
     <div id="openModal" className="modalDialog">
       <div>
+        <div className="close" onClick={hideModal}>
+          x
+        </div>
         <h2>
           {category} - ${question.price}
         </h2>
@@ -25,6 +35,8 @@ const mapState = state => ({
   categoryIdx: state.question.categoryIdx
 })
 
-const mapDispatch = dispatch => ({})
+const mapDispatch = dispatch => ({
+  hideModal: () => dispatch(hideQuestion())
+})
 
 export default connect(mapState, mapDispatch)(QuestionModal)

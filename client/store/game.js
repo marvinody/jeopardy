@@ -14,7 +14,10 @@ export const showQuestion = ({categoryIdx, questionIdx}) => (
 ) => {
   const {game} = getState()
   const question = game.board.categories[categoryIdx].questions[questionIdx]
-
+  if (question.answered) {
+    console.warn('Question has already been answered, skipping')
+    return
+  }
   dispatch({
     type: SHOW_QUESTION,
     categoryIdx,
