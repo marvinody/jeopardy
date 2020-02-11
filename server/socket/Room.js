@@ -138,6 +138,7 @@ module.exports = io => {
       this.updateState(state.INGAME)
       socket.emit(ACTIONS.GAME_START.RES, this.expandedInfo())
       this.addHostListeners()
+      this.addTeamListeners()
     }
 
     addHostListeners() {
@@ -149,8 +150,22 @@ module.exports = io => {
             categoryIdx,
             questionIdx
           })
+          console.debug('ENABLING BUZZER')
+          io.to(this.uniqueName).emit(ACTIONS.GAME_BUZZER.ENABLE)
         }
       )
+    }
+    handleBuzzIn() {
+      console.log('DISABLING BUZZER')
+      io.to(this.uniqueName).emit(ACTIONS.GAME_BUZZER.DISABLE)
+    }
+
+    addTeamListeners() {
+      Object.values(this.teams).forEach(socket => {
+        socket.on(ACTIONS.GAME_BUZZER.BUZZ_IN, () => {
+          this.handleBuzzIn()
+        })
+      })
     }
 
     createGame() {}

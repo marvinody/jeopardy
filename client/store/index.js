@@ -7,13 +7,15 @@ import game from './game'
 import isHost from './is_host'
 import questionModal from './question_modal'
 import question from './question'
+import isBuzzerDisabled from './is_buzzer_disabled'
 
 const reducer = combineReducers({
   user,
   isHost,
   game,
   questionModal,
-  question
+  question,
+  isBuzzerDisabled
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -25,3 +27,4 @@ export * from './game'
 export * from './is_host'
 export * from './question_modal'
 export * from './question'
+export * from './is_buzzer_disabled'
