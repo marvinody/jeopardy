@@ -9,7 +9,7 @@ const questions = {
       'What is the push method?'
     ],
     [
-      'This array method lets you search for an element that fulfills some criteria.',
+      'This array method lets you search for a single element that fulfills some criteria.',
       'What is the find method?'
     ],
     [
@@ -90,9 +90,49 @@ const questions = {
       'This is the highest specificity you can have on a css rule',
       'What is !important or 1-0-0-0-0'
     ]
+  ],
+  entryJSX: [
+    [
+      'This is the name for a cross between HTML and JavaScript',
+      'What is JSX?'
+    ],
+    [
+      'These symbols allow you to break into JavaScript world',
+      'What are `{` and `}` or moustaches?'
+    ],
+    ['This tag replaces <a> tags for navigation.', 'What is a <Link> tag?'],
+    [
+      'This class method will fire only ONCE right after the first render',
+      'What is ComponentDidMount method?'
+    ],
+    ['This library lets you write JSX', 'What is babel?']
   ]
 }
 module.exports = {
+  'flex-immersive-0': {
+    categories: [
+      {
+        title: 'Arrays',
+        questions: questions.arrayMethods
+      },
+      {
+        title: 'JS Funk',
+        questions: questions.funkyJS
+      },
+      {
+        title: 'AP JS History',
+        questions: questions.jsHistory
+      },
+      {
+        title: 'HowToMakeLaughs5',
+        questions: questions.html5
+      },
+      {
+        title: "Stylin'",
+        questions: questions.css
+      }
+    ]
+  },
   'flex-immersive-1': {
     categories: [
       {
@@ -114,6 +154,10 @@ module.exports = {
       {
         title: "Stylin'",
         questions: questions.css
+      },
+      {
+        title: 'JSWHAT?',
+        questions: questions.entryJSX
       }
     ]
   }
